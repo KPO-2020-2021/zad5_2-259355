@@ -10,11 +10,10 @@ class Mount_with_ridge : public Scene_object {
         char *strm1 = new char[stream1.size() + 1];
         strcpy(strm1, stream1.c_str());
 
-        std::string stream2 = "Mount with ridge" + std::to_string(count1) + ".dat"; 
+        std::string stream2 = "Mount with ridge" + std::to_string(count1); 
         char *strm2 = new char[stream2.size() + 1];
         strcpy(strm2, stream2.c_str());
 
-        std::cout << "Init obstacle type 1" << std::endl;
         Lacze.DodajNazwePliku(strm1);
         this->set_name_of_file(strm1);
         this->set_name(strm2);

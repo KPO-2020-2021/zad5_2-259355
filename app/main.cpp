@@ -192,23 +192,29 @@ scena Scena;
         char obs_choice;
         Vector3 beg_position;
         Vector3 scale;
-        cout << "which type of obstacle you want to add ? You can choose 1,2,3 " << endl;
+        cout << "which type of obstacle you want to add ?" << endl;
+        cout << "1 - Piramid" << endl;
+        cout << "2 - Mountain with ridge" << endl;
+        cout << "3 - Cuboid" << endl;
         cin >> obs_choice;
         cout << "where do you want the middle of obstacle write position x,y" << endl;
         cin >> beg_position[0];
         cin >> beg_position[1];
-        cout << "Choose the scale on x side, y side, z side (for example 10 10 60): " << std::endl;
+        cout << "Choose the scale on OX, OY, OZ (for example 10 10 60): " << std::endl;
         cin >> scale;
         Scena.make_obstacle(Lacze,beg_position,scale,obs_choice);
+        cout << "Element has been added to the scene " << std::endl;
         break;}
 
       case 'd':{
+        int i = 0;
         unsigned int num_obs;
         list<shared_ptr<Scene_object>>::iterator it = Scena.Obstacles.begin();
         cout << "choose which obstacle you want to delete : " << endl;
         while( it != Scena.Obstacles.end()){
-          (*it)->show_parameters();
+          (*it)->show_parameters(i);
           ++it;
+          ++i;
         }
         cin >> num_obs;
         it = Scena.Obstacles.begin();

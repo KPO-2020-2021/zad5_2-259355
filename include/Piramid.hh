@@ -10,11 +10,10 @@ class Piramid : public Scene_object {
         char *strm2 = new char[stream2.size() + 1];
         strcpy(strm2, stream2.c_str());
 
-        std::string stream3 = "Piramid" + std::to_string(count2) + ".dat"; 
+        std::string stream3 = "Piramid" + std::to_string(count2); 
         char *strm3 = new char[stream2.size() + 1];
         strcpy(strm3, stream3.c_str());
 
-        std::cout << "Init obstacle type 2" << std::endl;
         Lacze.DodajNazwePliku(strm2);
         this->set_name_of_file(strm2);
         this->set_name(strm3);

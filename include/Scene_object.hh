@@ -34,14 +34,20 @@ class Scene_object{
         name_of_file = tmp;
     };
 
-    void show_parameters(){
-        static int count = 1;
-        std::cout << count << " " << name << " (" << middle_pos << ") " << std::endl;
+    void show_parameters(int tmp){
+        // static int count = 1;
+        std::cout << tmp+1 << " " << name << " (" << middle_pos << ") " << std::endl;
+        // count += 1;
     };
 
     void delete_Obstacle(PzG::LaczeDoGNUPlota &Lacze){
-        std::cout << name_of_file << std::endl;
         Lacze.UsunNazwePliku(name_of_file);
+        if(remove(name_of_file.c_str())==0){
+            puts("File successfully deleted");
+        }
+        else{
+            perror("Error deleting obstacle file");
+        }
     };
 
 
