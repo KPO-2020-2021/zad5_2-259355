@@ -27,6 +27,12 @@ Vector3.hh
 ../include/Vector3.hh
 iomanip
 -
+Scene_object.hh
+../include/Scene_object.hh
+memory
+-
+list
+-
 
 ../include/GranBlock.hh
 Vector3.hh
@@ -121,8 +127,6 @@ Mount_with_ridge.hh
 ../include/Mount_with_ridge.hh
 Cuboid_obstacle.hh
 ../include/Cuboid_obstacle.hh
-Scene_object.hh
-../include/Scene_object.hh
 string.h
 -
 memory

@@ -15,6 +15,7 @@ CMakeFiles/program.dir/src/Drone.cpp.o
  ../include/Drone.hh
  ../include/GranBlock.hh
  ../include/Prostopadl.hh
+ ../include/Scene_object.hh
  ../include/Vector3.hh
  ../include/lacze_do_gnuplota.hh
  ../include/matrix.hh

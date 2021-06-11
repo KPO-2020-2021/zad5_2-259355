@@ -36,6 +36,19 @@ class Prostopadl : public GranBlock
 
   Prostopadl();                               // Konstruktor klasy
 
+  Prostopadl get_corp(const char *Name){
+    Prostopadl temp;
+    double x,y,z; 
+    std::ifstream FileWe(Name);
+    for(int i = 0; i < NOPOINTS; ++i){
+      FileWe >> x >> y >> z;
+      temp(i,0) = x; 
+      temp(i,1) = y;
+      temp(i,2) = z;
+      }
+      return temp;
+    };
+
   Vector3 mid; /**< Wspolrzedne srodka prostopadloscianu*/
 
   Vector3 angles; /**< katy obrotu */

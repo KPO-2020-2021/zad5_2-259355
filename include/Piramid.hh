@@ -10,18 +10,14 @@ class Piramid : public Scene_object {
         char *strm2 = new char[stream2.size() + 1];
         strcpy(strm2, stream2.c_str());
 
-        std::string stream3 = "Piramid" + std::to_string(count2); 
-        char *strm3 = new char[stream2.size() + 1];
-        strcpy(strm3, stream3.c_str());
+        std::string stream3 = "Piramid"; 
 
         Lacze.DodajNazwePliku(strm2);
         this->set_name_of_file(strm2);
-        this->set_name(strm3);
+        this->set_name(stream3);
         this->set_mid(begin_position);
         count2 += 1;
         this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/gora_z_dluga_grania.dat",strm2,NOPOINTS,scale,begin_position,'2'));
     };
-
-    
 
 };

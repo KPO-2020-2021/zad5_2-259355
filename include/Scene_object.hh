@@ -15,6 +15,8 @@ class Scene_object{
     Vector3 middle_pos;
 
     Prostopadl obst;
+
+    double radius;
     
     public:
 
@@ -35,13 +37,16 @@ class Scene_object{
     };
 
     void show_parameters(int tmp){
-        // static int count = 1;
         std::cout << tmp+1 << " " << name << " (" << middle_pos << ") " << std::endl;
-        // count += 1;
+    };
+
+    void count_radius(){
+        radius = sqrt(pow(obst[0][0] - middle_pos[0],2) + pow(obst[0][1] - middle_pos[1],2));
     };
 
     void delete_Obstacle(PzG::LaczeDoGNUPlota &Lacze){
         Lacze.UsunNazwePliku(name_of_file);
+        std::cout << name_of_file << std::endl;
         if(remove(name_of_file.c_str())==0){
             puts("File successfully deleted");
         }
@@ -50,8 +55,17 @@ class Scene_object{
         }
     };
 
+    Prostopadl get_obst(){
+        return obst;
+    };
 
+    Vector3 get_middle(){
+        return middle_pos;
+    };
 
+    std::string get_name(){
+        return name;
+    };
 
     Prostopadl Init_The_Obstacle(const char * StrmWe, const char * StrmWy, double num_of_peak, Vector3 scale,Vector3 trans, char choice){
     Prostopadl temp;

@@ -5,7 +5,7 @@
 #include "Piramid.hh"
 #include "Mount_with_ridge.hh"
 #include "Cuboid_obstacle.hh"
-#include "Scene_object.hh"
+// #include "Scene_object.hh"
 #include <string.h>
 #include <memory>
 #include <list>
@@ -33,6 +33,8 @@ class scena : public Drone{
     public:
 
     std::list <std::shared_ptr<Scene_object>> Obstacles;   ///<Lista mieszczaca przeszkody
+    
+    std::list <std::shared_ptr<Scene_object>> Objects;   ///<Lista mieszczaca wszystkie obiekty na scenie
 
     Drone *getdrone(){return (&drones[Active_drone]);}; ///<Funkcja dajaca dostep do danego drona
 
@@ -75,18 +77,24 @@ void Make_Path(PzG::LaczeDoGNUPlota &Lacze, double choosen_drone, const char *Na
 
 ///<Funkcja tworzaca przeszkode i dodajaca ja do lacza
 void make_obstacle(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale, char choice){
-
+    Scene_object tmp;
     switch(choice){
         case '1':{
-            Obstacles.push_back(std::make_shared<Scene_object>(Piramid(Lacze,begin_position,scale)));
+            tmp = Piramid(Lacze,begin_position,scale);
+            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
+            Objects.push_back(std::make_shared<Scene_object>(tmp));        
         break;}
 
         case '2':{
-            Obstacles.push_back(std::make_shared<Scene_object>(Mount_with_ridge(Lacze,begin_position,scale)));
+            tmp = Mount_with_ridge(Lacze,begin_position,scale);
+            Objects.push_back(std::make_shared<Scene_object>(tmp));
+            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
 
         case '3':{
-            Obstacles.push_back(std::make_shared<Scene_object>(Cuboid_obstacle(Lacze,begin_position,scale)));
+            tmp = Cuboid_obstacle(Lacze,begin_position,scale);
+            Objects.push_back(std::make_shared<Scene_object>(tmp));
+            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
     }
 

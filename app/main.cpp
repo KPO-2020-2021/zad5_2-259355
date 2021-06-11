@@ -116,12 +116,24 @@ scena Scena;
   drone1.position[1] = drone1.position[0];
   drone2.position[1] = drone2.position[0];
 
+  drone1.set_mid(drone1.position[0]);
+  drone1.set_obst(drone1.get_corp(SZESCIAN_ZM));
+  drone1.set_name("Drone1");
+  drone2.set_mid(drone2.position[0]);
+  drone2.set_obst(drone2.get_corp(SZESCIAN_ZM_V2));
+  drone2.set_name("Drone2");
+
   Scena.Add_drone(drone1);
   Scena.Add_drone(drone2);
+
+  
+  Scena.Objects.push_front(make_shared<Scene_object>(drone2));
+  Scena.Objects.push_front(make_shared<Scene_object>(drone1));
 
   double choice_drone = 0;
   double angle1=0, angle2=0;
   double tmp1 = 0, tmp2 = 0;
+  unsigned int temp = 0;
   char choice = 'a';
   while (choice != 'k'){
   
@@ -137,9 +149,7 @@ scena Scena;
           cin >> lenght;
           angle1 += tmp1;
           Scena.Make_Path(Lacze, choice_drone, Path_V1, lenght, angle1);
-          Lacze.Rysuj();
-          (*drn).Relocate(choice_drone, angle1, lenght, Lacze, NamesFilesLoc_V1, NamesFilesProp_V1);
-          (*drn).position[0] = (*drn).position[1];
+          (*drn).Relocate(Scena.Objects,choice_drone, angle1, lenght, Lacze, NamesFilesLoc_V1, NamesFilesProp_V1);
           Lacze.UsunNazwePliku(Path_V1);
           tmp1 = angle1;
           }
@@ -150,9 +160,7 @@ scena Scena;
           cin >> lenght;
           angle2 += tmp2;
           Scena.Make_Path(Lacze, choice_drone, Path_V2, lenght, angle2);
-          Lacze.Rysuj();
-          (*drn).Relocate(choice_drone, angle2,lenght, Lacze, NamesFilesLoc_V2, NamesFilesProp_V2);
-          (*drn).position[0] = (*drn).position[1];
+          (*drn).Relocate(Scena.Objects,choice_drone, angle2,lenght, Lacze, NamesFilesLoc_V2, NamesFilesProp_V2);
           Lacze.UsunNazwePliku(Path_V2);
           tmp2 = angle2;
         }
@@ -230,9 +238,31 @@ scena Scena;
         cout << "choose which drone would you fly (1,2)" << endl;
         cin >> choice_drone;
         if(choice_drone == 1 || choice_drone == 2){
+          if(temp == 0){
+            // Scena.Objects.pop_front();
+            Scena.choose_drone(choice_drone);
+            drn = Scena.getdrone();
+            // (*drn).set_mid((*drn).position[0]);
+            // // (*drn).set_obst((*drn).get_corp());
+            // (*drn).set_name("Drone");
+            // Scena.Objects.push_front(make_shared<Scene_object>(*drn));
+            temp += 1;
+          }
+          else if(temp == 1){
+            // Scena.Objects.pop_front();
+            // Scena.Objects.pop_front();
+            // Scena.Objects.push_front(make_shared<Scene_object>(*drn));
+            Scena.choose_drone(choice_drone);
+            drn = Scena.getdrone();
+            // (*drn).set_mid((*drn).position[0]);
+            // (*drn).set_obst((*drn).get_corp());
+            // (*drn).set_name("Drone");
+            // Scena.Objects.push_front(make_shared<Scene_object>(*drn));
+          }
           cout << "You have choosen drone at the position: " << endl;
-          Scena.choose_drone(choice_drone);
-          drn = Scena.getdrone();
+          // Scena.choose_drone(choice_drone);
+          // drn = Scena.getdrone();
+          // Scena.Obstacles.push_front(make_shared<Scene_object>(*drn));
           cout << drn->position[0] << endl;}
           else{
             cout << "Wrong choice" << endl;

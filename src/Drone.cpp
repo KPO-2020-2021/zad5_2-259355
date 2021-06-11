@@ -71,11 +71,10 @@ void Drone::Init(const char *NamesFilesLocal[], int step){
  * @param const char *NamesFilesProper[]
  */
 void Drone::Engage2(double angle, Vector3 position, const char *NamesFilesLocal[], const char *NamesFilesProper[], int step){
-
     this->Init(NamesFilesLocal, step);
 
     new Prostopadl(NamesFilesLocal[0],NamesFilesProper[0], arg_jed, angle, position);
-    
+
     for(unsigned int Idx = 1; NamesFilesLocal[Idx]!= nullptr; ++Idx){
         rotor[Idx] = new Block(NamesFilesLocal[Idx], NamesFilesProper[Idx], arg_jed, position, angle);
     }
@@ -152,7 +151,6 @@ void Drone::GoDownAndUp(double up_down, double angletemp, PzG::LaczeDoGNUPlota &
 void Drone::Orientation(double angle, double angletemp, PzG::LaczeDoGNUPlota &Lacze, const char *NamesFilesLocal[], const char *NamesFilesProper[]){
     std::cout << "Change of the orientation..." << std::endl;
     double step;
-    std::cout << angletemp;
     if(angle > 0){
     for(; angletemp <= angle; angletemp += 5 ){
         step = 2;
@@ -182,21 +180,34 @@ void Drone::Orientation(double angle, double angletemp, PzG::LaczeDoGNUPlota &La
  * @param const char *NamesFilesLocal[]
  * @param const char *NamesFilesProper[]
  */
-void Drone::Relocate(unsigned int number, double angle, double lenght_of_path, PzG::LaczeDoGNUPlota &Lacze, const char *NamesFilesLocal[], const char *NamesFilesProper[])
+void Drone::Relocate(std::list<std::shared_ptr<Scene_object>> Objects,unsigned int number, double angle, double lenght_of_path, PzG::LaczeDoGNUPlota &Lacze, const char *NamesFilesLocal[], const char *NamesFilesProper[])
 {   
     if(number == 1){
     static double angletemp1=0;
     this->GoDownAndUp(1,angletemp1,Lacze,NamesFilesLocal,NamesFilesProper);
     this->Orientation(angle, angletemp1, Lacze,NamesFilesLocal,NamesFilesProper);
     this->GoForward(angle,lenght_of_path,Lacze,NamesFilesLocal,NamesFilesProper);
+    while(!this->check_landing(number,Objects)){
+        std::cout << "Problem with landing" << std::endl;
+        std::cout << "Going futher" << std::endl;
+        this->GoForward(angle,30,Lacze,NamesFilesLocal,NamesFilesProper);
+    }
+    std::cout << "There isnt any obstacles, landing phase possible" << std::endl;
     this->GoDownAndUp(2,angle,Lacze,NamesFilesLocal,NamesFilesProper);
     angletemp1 += angle;}
+
     else if(number == 2){
     static double angletemp2=0;
     this->GoDownAndUp(1,angletemp2,Lacze,NamesFilesLocal,NamesFilesProper);
     this->Orientation(angle, angletemp2, Lacze,NamesFilesLocal,NamesFilesProper);
     this->GoForward(angle,lenght_of_path,Lacze,NamesFilesLocal,NamesFilesProper);
-    this->GoDownAndUp(2,angle,Lacze,NamesFilesLocal,NamesFilesProper);    
+    while(!this->check_landing(number,Objects)){
+        std::cout << "Problem with landing" << std::endl;
+        std::cout << "Going futher" << std::endl;
+        this->GoForward(angle,30,Lacze,NamesFilesLocal,NamesFilesProper);
+    }
+    std::cout << "There isnt any obstacles, landing phase possible" << std::endl;
+    this->GoDownAndUp(2,angle,Lacze,NamesFilesLocal,NamesFilesProper);   
     angletemp2 += angle;}
 }
 

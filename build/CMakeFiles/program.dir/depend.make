@@ -14,6 +14,7 @@ CMakeFiles/program.dir/src/Drone.cpp.o: ../include/Block.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/Drone.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/GranBlock.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/Prostopadl.hh
+CMakeFiles/program.dir/src/Drone.cpp.o: ../include/Scene_object.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/Vector3.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/lacze_do_gnuplota.hh
 CMakeFiles/program.dir/src/Drone.cpp.o: ../include/matrix.hh
