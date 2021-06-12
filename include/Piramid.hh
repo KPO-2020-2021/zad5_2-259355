@@ -4,7 +4,45 @@ class Piramid : public Scene_object {
 
     public:
 
+    void Piramid_Init(){
+        double x,y,z;
+        Prostopadl tmp;
+        std::ifstream FileWe(SZESCIAN_WZ);
+        std::ofstream FileWy("../bryly_wzorcowe/gora_z_ostrym_szczytem_tmp.dat");
+        assert(FileWe.good());
+        assert(FileWy.good());
+        for(int i = 0; i < NOPOINTS; ++i){
+            FileWe >> x >> y >> z;
+            Vector3 temp;
+            double arg[] = {x,y,z};
+            temp = Vector3(arg);
+            if(i%4 == 0){
+                tmp(i,0) = 0;
+                tmp(i,1) = -0.25;
+                tmp(i,2) = 0.5;
+                FileWy << tmp(i) << std::endl;
+                }
+            else if(i%4 == 3){
+                tmp(i,0) = 0;
+                tmp(i,1) = 0.25;
+                tmp(i,2) = 0.5;
+                FileWy << tmp(i) << std::endl;}
+            else if ( (i < 7 || i > 15) && (i%4 == 1 || i%4 == 2)){
+                tmp(i,0) = 0;
+                tmp(i,1) = 0;
+                tmp(i,2) = 1;
+                FileWy << tmp(i) << std::endl;
+            }
+            else {
+                temp[2] = 0;
+                FileWy << temp << std::endl;
+            }
+        // FileWe.close();
+        // FileWy.close();
+    }}        
+
     Piramid(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
+        this->Piramid_Init();
         static int count2 = 1;
         std::string stream2 = "../dat/gora_z_ostrym_szczytem" + std::to_string(count2) + ".dat"; 
         char *strm2 = new char[stream2.size() + 1];
@@ -17,7 +55,7 @@ class Piramid : public Scene_object {
         this->set_name(stream3);
         this->set_mid(begin_position);
         count2 += 1;
-        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/gora_z_dluga_grania.dat",strm2,NOPOINTS,scale,begin_position,'2'));
+        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/gora_z_ostrym_szczytem_tmp.dat",strm2,NOPOINTS,scale,begin_position,'2'));
     };
 
 };

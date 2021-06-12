@@ -4,7 +4,51 @@ class Mount_with_ridge : public Scene_object {
 
     public:
 
+    void Mount_with_ridge_Init(){
+        double x,y,z;
+        Prostopadl tmp;
+        std::ifstream FileWe(SZESCIAN_WZ);
+        std::ofstream FileWy("../bryly_wzorcowe/gora_z_dluga_grania_tmp.dat");
+        assert(FileWe.good());
+        assert(FileWy.good());
+        for(int i = 0; i < NOPOINTS; ++i){
+            FileWe >> x >> y >> z;
+            Vector3 temp;
+            double arg[] = {x,y,z};
+            temp = Vector3(arg);
+            if(i%4 == 0){
+                tmp(i,0) = 0;
+                tmp(i,1) = -0.5;
+                tmp(i,2) = 0.5;
+                FileWy << tmp(i) << std::endl;
+                }
+            else if(i%4 == 3){
+                tmp(i,0) = 0;
+                tmp(i,1) = 0.5;
+                tmp(i,2) = 0.5;
+                FileWy << tmp(i) << std::endl;}
+            else if ( (i < 7 || i > 15) && (i%4 == 1 || i%4 == 2)){
+                if(i%4 == 1){
+                    tmp(i,0) = 0.5;
+                    tmp(i,1) = -0.5;
+                    tmp(i,2) = 1;
+                    FileWy << tmp(i) << std::endl;}
+                else if(i%4 == 2){
+                    tmp(i,0) = 0.5;
+                    tmp(i,1) = 0.5;
+                    tmp(i,2) = 1;
+                    FileWy << tmp(i) << std::endl;}
+            }
+            else {
+                temp[2] = 0;
+                FileWy << temp << std::endl;
+            }
+        // FileWe.close();
+        // FileWy.close();
+    }} 
+
     Mount_with_ridge(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
+        Mount_with_ridge_Init();
         static int count1 = 1;
         std::string stream1 = "../dat/gora_z_dluga_grania" + std::to_string(count1) + ".dat"; 
         char *strm1 = new char[stream1.size() + 1];
@@ -18,6 +62,6 @@ class Mount_with_ridge : public Scene_object {
         this->set_name(stream2);
         this->set_mid(begin_position);
         count1 += 1;
-        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/gora_z_dluga_grania.dat",strm1,NOPOINTS,scale,begin_position,'1'));
+        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/gora_z_dluga_grania_tmp.dat",strm1,NOPOINTS,scale,begin_position,'1'));
     };
 };

@@ -32,7 +32,7 @@ class scena : public Drone{
 
     public:
 
-    std::list <std::shared_ptr<Scene_object>> Obstacles;   ///<Lista mieszczaca przeszkody
+    // std::list <std::shared_ptr<Scene_object>> Obstacles;   ///<Lista mieszczaca przeszkody
     
     std::list <std::shared_ptr<Scene_object>> Objects;   ///<Lista mieszczaca wszystkie obiekty na scenie
 
@@ -58,7 +58,7 @@ void Make_Path(PzG::LaczeDoGNUPlota &Lacze, double choosen_drone, const char *Na
     if(choosen_drone == 1){
     drones[0].position[1][0] = drones[0].x_of_end(drones[0].position[0][0],angletemp,lenght_of_path) ; 
     drones[0].position[1][1] = drones[0].y_of_end(drones[0].position[0][1],angletemp,lenght_of_path) ; 
-    StrmWy << drones[0].position[0] << std::endl
+    StrmWy << this->drones[0].position[0][0] << " " << this->drones[0].position[0][1] << " 0 " << std::endl
            << this->drones[0].position[0][0] << " " << this->drones[0].position[0][1] << " 80" << std::endl
            << drones[0].position[1][0] << " " << drones[0].position[1][1] << " 80" << std::endl
            << drones[0].position[1][0] << " " << drones[0].position[1][1] << " 0" << std::endl;
@@ -67,7 +67,7 @@ void Make_Path(PzG::LaczeDoGNUPlota &Lacze, double choosen_drone, const char *Na
     else if(choosen_drone == 2){
     drones[1].position[1][0] = drones[1].x_of_end(drones[1].position[0][0],angletemp,lenght_of_path) ;
     drones[1].position[1][1] = drones[1].y_of_end(drones[1].position[0][1],angletemp,lenght_of_path) ;
-    StrmWy << this->drones[1].position[0] << std::endl
+    StrmWy << this->drones[1].position[0][0] << " " << this->drones[1].position[0][1] << " 0 " << std::endl
            << this->drones[1].position[0][0] << " " << this->drones[1].position[0][1] << " 80 " << std::endl
            << drones[1].position[1][0] << " " << drones[1].position[1][1] << " 80 " << std::endl
            << drones[1].position[1][0] << " " << drones[1].position[1][1] << " 0 " << std::endl;
@@ -81,20 +81,20 @@ void make_obstacle(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 s
     switch(choice){
         case '1':{
             tmp = Piramid(Lacze,begin_position,scale);
-            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
+            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
             Objects.push_back(std::make_shared<Scene_object>(tmp));        
         break;}
 
         case '2':{
             tmp = Mount_with_ridge(Lacze,begin_position,scale);
             Objects.push_back(std::make_shared<Scene_object>(tmp));
-            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
+            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
 
         case '3':{
             tmp = Cuboid_obstacle(Lacze,begin_position,scale);
             Objects.push_back(std::make_shared<Scene_object>(tmp));
-            Obstacles.push_back(std::make_shared<Scene_object>(tmp));
+            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
     }
 

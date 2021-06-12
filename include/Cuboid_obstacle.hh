@@ -3,7 +3,36 @@ class Cuboid_obstacle : public Scene_object{
 
     public:
 
+    void Cuboid_Init(){
+        double x,y,z;
+        Prostopadl tmp;
+        std::ifstream FileWe(SZESCIAN_WZ);
+        std::ofstream FileWy("../bryly_wzorcowe/plaskowyz_tmp.dat");
+        assert(FileWe.good());
+        assert(FileWy.good());
+        for(int i = 0; i < NOPOINTS; ++i){
+            FileWe >> x >> y >> z;
+            Vector3 temp;
+            double arg[] = {x,y,z};
+            temp = Vector3(arg);
+            if(i%4 == 0 || i%4 == 3){
+                temp[2] = 0;
+                FileWy << temp << std::endl;
+                }
+            else if ( (i < 7 || i > 15) && (i%4 == 1 || i%4 == 2)){
+                temp[2] = 1;
+                FileWy << temp << std::endl;
+            }
+            else {
+                temp[2] = 0;
+                FileWy << temp << std::endl;
+            }
+        // FileWe.close();
+        // FileWy.close();
+    }} 
+
     Cuboid_obstacle(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
+        Cuboid_Init();
         static int count3 = 1;
         std::string stream3 = "../dat/plaskowyz" + std::to_string(count3) + ".dat"; 
         char *strm3 = new char[stream3.size() + 1];
@@ -17,6 +46,6 @@ class Cuboid_obstacle : public Scene_object{
         this->set_name(stream2);
         this->set_mid(begin_position);
         count3 += 1;
-        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/plaskowyz.dat",strm3,NOPOINTS,scale,begin_position,'3'));
+        this->set_obst(Init_The_Obstacle("../bryly_wzorcowe/plaskowyz_tmp.dat",strm3,NOPOINTS,scale,begin_position,'3'));
     };
 };

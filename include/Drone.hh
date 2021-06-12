@@ -60,15 +60,16 @@ class Drone: public Block, public Prostopadl, public Scene_object
     }
     else if(num_drone == 2){
         ++it;
+        // std::cout<< (*it)->get_name() << std::endl;
         (*it)->set_mid(position[0]); 
         it = Objects.begin();
     }
-    std::cout << Objects.size() << std::endl;
+    // std::cout << Objects.size() << std::endl;
     // std::cout << (*it)->get_name() << std::endl;
     while( it != Objects.end()){
         temp = (*it)->get_obst();
         name = (*it)->get_name();
-        std::cout << (*it)->get_name() << std::endl;
+        // std::cout << (*it)->get_name() << std::endl;
         x_gr1 = this->position[0][0] - 7;
         x_gr2 = this->position[0][0] + 7;
         if(name == "Piramid"){
@@ -96,7 +97,6 @@ class Drone: public Block, public Prostopadl, public Scene_object
            value_gr2x = temp(1,0);
            value_gr1y = temp(6,1);
            value_gr2y = temp(1,1);
-           ++it;
         }
         else if(name == "Drone2"){
         //    std::cout << temp << std::endl;
@@ -118,10 +118,13 @@ class Drone: public Block, public Prostopadl, public Scene_object
         }}
         else if(name == "Drone1" || name == "Drone2"){
             double distance_middle;
-            std::cout << position[0][0] << " " << position[0][1] << " " << (*it)->get_middle()[0] << std::endl;
+            // std::cout << position[0][0] << " " << position[0][1] << " " << (*it)->get_middle() << std::endl;
             distance_middle = sqrt(pow(position[0][0] - (*it)->get_middle()[0],2) + pow(position[0][1] - (*it)->get_middle()[1],2));
             if(distance_middle <= 12){
                 tmp = false;
+            }
+            if(name == "Drone1"){
+                ++it;
             }
         }
         if(tmp == false){

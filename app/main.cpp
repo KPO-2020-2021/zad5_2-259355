@@ -167,6 +167,7 @@ scena Scena;
         else{
           cout << "You have choosen wrong drone " << endl;
         }
+        (*drn).position[1] = (*drn).position[0];
       break;}
 
       case 'm':{
@@ -217,18 +218,22 @@ scena Scena;
       case 'd':{
         int i = 0;
         unsigned int num_obs;
-        list<shared_ptr<Scene_object>>::iterator it = Scena.Obstacles.begin();
+        // list<shared_ptr<Scene_object>>::iterator it = Scena.Obstacles.begin();
+        list<shared_ptr<Scene_object>>::iterator it = Scena.Objects.begin();
         cout << "choose which obstacle you want to delete : " << endl;
-        while( it != Scena.Obstacles.end()){
+        advance(it,2);
+        while( it != Scena.Objects.end()){
+          // advance(it,2);
           (*it)->show_parameters(i);
           ++it;
           ++i;
         }
         cin >> num_obs;
-        it = Scena.Obstacles.begin();
-        advance(it,num_obs-1);
+        it = Scena.Objects.begin();
+        advance(it,num_obs+1);
         (*it)->delete_Obstacle(Lacze);
-        Scena.Obstacles.erase(it);
+        Scena.Objects.erase(it);
+        
         Lacze.Rysuj();
         break;}
 

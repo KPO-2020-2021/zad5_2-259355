@@ -24,9 +24,9 @@ class GranBlock{
 
 	public:
 
-	Vector3 operator[](int Ind) const { return figure[Ind];}; ///< wypisywanie
+	// Vector3 operator[](int Ind) const { return figure[Ind];}; ///< wypisywanie
 
-	Vector3 &operator[](int Ind) {return figure[Ind];};	///< wpisywanie
+	// Vector3 &operator[](int Ind) {return figure[Ind];};	///< wpisywanie
 
     double toradians(double angle); ///< Funkcja zmieniajaca kat na radiany
 

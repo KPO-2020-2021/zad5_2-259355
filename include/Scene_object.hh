@@ -41,7 +41,7 @@ class Scene_object{
     };
 
     void count_radius(){
-        radius = sqrt(pow(obst[0][0] - middle_pos[0],2) + pow(obst[0][1] - middle_pos[1],2));
+        radius = sqrt(pow(obst(0,0) - middle_pos[0],2) + pow(obst(0,1) - middle_pos[1],2));
     };
 
     void delete_Obstacle(PzG::LaczeDoGNUPlota &Lacze){
