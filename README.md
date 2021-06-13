@@ -1,4 +1,4 @@
-![Class diagram](/diagram.png)
+![Class diagram](/Diagram.png)
 ## Building
 
 Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target.
@@ -18,7 +18,7 @@ Example:
 ```
 
 Things to remember:
-* changes to zad3/CMakeLists.txt with new files added, i.e.:
+* changes to zad5_2/CMakeLists.txt with new files added, i.e.:
 
 ```cpp
 # --------------------------------------------------------------------------------
