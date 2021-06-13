@@ -1,9 +1,19 @@
 #include "Scene_object.hh"
 
+/**
+ * \brief Klasa Mount_with_ridge
+ * 
+ * Klasa pozwalajaca dzialac na Gorze z grania
+ * Klasa dziedziczy po klasie Scene_Object 
+ * 
+ */
 class Mount_with_ridge : public Scene_object {
 
     public:
 
+    /**
+     * Metoda inicjujaca poczatkowe wierzcholki piramidy odpowiednio deformujac prostopadloscian
+     */
     void Mount_with_ridge_Init(){
         double x,y,z;
         Prostopadl tmp;
@@ -47,6 +57,12 @@ class Mount_with_ridge : public Scene_object {
         // FileWy.close();
     }} 
 
+    /**
+     * Metoda tworzaca odpowiednio zmieniony prostopadloscian 
+     * @param PzG::LaczeDoGNUPlota &Lacze
+     * @param Vector3 begin_position
+     * @param Vector3 scale
+     */
     Mount_with_ridge(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
         Mount_with_ridge_Init();
         static int count1 = 1;

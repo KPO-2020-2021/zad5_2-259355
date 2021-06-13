@@ -4,46 +4,69 @@
 #include "Vector3.hh"
 #include "Prostopadl.hh"
 
+/**
+ * \brief Klasa Sceny obiektow
+ * 
+ * Klasa pozwalajaca operowac na przeszkodach
+ * 
+ */
 class Scene_object{
 
     private:
 
-    std::string name_of_file;
+    std::string name_of_file;   ///< Zmienna przechowująca nazwe pliku przeszkody
 
-    std::string name;
+    std::string name;   ///<Zmienna przechowujaca typ przeszkody
 
-    Vector3 middle_pos;
+    Vector3 middle_pos;     ///<Zmienna przechowywujaca pozycje srodka przeszkody
 
-    Prostopadl obst;
-
-    double radius;
+    Prostopadl obst;    ///<Zmienna przechowywujaca wspolrzedne wierzcholkow przeszkody
     
     public:
 
+    /**
+     * Metoda ustawiajaca pozycje srodkowa przeszkody 
+     * @param Vector3 tmp
+     */
     void set_mid(Vector3 tmp){
         middle_pos = tmp;
     };
 
+    /**
+     * Metoda ustawiajaca nazwe typu przeszkody 
+     * @param std::string tmp
+     */
     void set_name(std::string tmp){
         name = tmp;
     };
 
+    /**
+     * Metoda ustawiajaca wierzcholki przeszkody 
+     * @param Prostopadl tmp
+     */
     void set_obst(Prostopadl tmp){
         obst = tmp;
     };
-
+    /**
+     * Metoda ustawiajaca pozycje srodkowa przeszkody 
+     * @param Vector3 tmp
+     */
     void set_name_of_file(std::string tmp){
         name_of_file = tmp;
     };
 
+    /**
+     * Metoda wyswietlajaca parametry przeszkody nazwe, numer, pozycje srodkowa 
+     * @param int tmp
+     */
     void show_parameters(int tmp){
         std::cout << tmp+1 << " " << name << " (" << middle_pos << ") " << std::endl;
     };
 
-    void count_radius(){
-        radius = sqrt(pow(obst(0,0) - middle_pos[0],2) + pow(obst(0,1) - middle_pos[1],2));
-    };
-
+    /**
+     * Metoda usuwajaca plik przeszkody 
+     * @param PzG::LaczeDoGNUPlota &Lacze
+     */
     void delete_Obstacle(PzG::LaczeDoGNUPlota &Lacze){
         Lacze.UsunNazwePliku(name_of_file);
         std::cout << name_of_file << std::endl;
@@ -55,18 +78,40 @@ class Scene_object{
         }
     };
 
+    /**
+     * Metoda dajaca dostep do wierzcholkow przeszkody 
+     * @return Prostopadl obst
+     */
     Prostopadl get_obst(){
         return obst;
     };
 
+    /**
+     * Metoda dajaca dostep do pozycji srodka przeszkody
+     * @return Vector3 middle_pos
+     */
     Vector3 get_middle(){
         return middle_pos;
     };
 
+    /**
+     * Metoda dajaca dostpe do typu przeszkody 
+     * @return std::string name
+     */
     std::string get_name(){
         return name;
     };
 
+    /**
+     * Funkcja inicjująca tworzenie przeszkody poprzez odpowiednie zmiany wierzchołkow i zapisanie ich w pliku
+     * @param const char *StrmWe
+     * @param const char *StrmWy
+     * @param double num_of_peak
+     * @param Vector3 scale
+     * @param Vector3 trans
+     * @param char choice
+     * @return Prostopadl temp
+     */
     Prostopadl Init_The_Obstacle(const char * StrmWe, const char * StrmWy, double num_of_peak, Vector3 scale,Vector3 trans, char choice){
     Prostopadl temp;
     std::ifstream FileWe(StrmWe);

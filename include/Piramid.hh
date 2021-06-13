@@ -1,9 +1,20 @@
 #include "Scene_object.hh"
 
+
+/**
+ * \brief Klasa Piramidy
+ * 
+ * Klasa pozwalajaca dzialac na piramidach
+ * Klasa dziedziczy po klasie Scene_Object 
+ * 
+ */
 class Piramid : public Scene_object {
 
     public:
 
+    /**
+     * Metoda inicjujaca poczatkowe wierzcholki piramidy odpowiednio deformujac prostopadloscian
+     */
     void Piramid_Init(){
         double x,y,z;
         Prostopadl tmp;
@@ -41,6 +52,12 @@ class Piramid : public Scene_object {
         // FileWy.close();
     }}        
 
+    /**
+     * Metoda tworzaca odpowiednio zmieniony prostopadloscian 
+     * @param PzG::LaczeDoGNUPlota &Lacze
+     * @param Vector3 begin_position
+     * @param Vector3 scale
+     */
     Piramid(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
         this->Piramid_Init();
         static int count2 = 1;

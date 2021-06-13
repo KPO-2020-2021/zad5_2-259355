@@ -75,32 +75,39 @@ void Make_Path(PzG::LaczeDoGNUPlota &Lacze, double choosen_drone, const char *Na
     Lacze.Rysuj();}
 };
 
-///<Funkcja tworzaca przeszkode i dodajaca ja do lacza
+/**
+* Metoda Inicjujaca przeszkody 
+* @param PzG::LaczeDoGNUPlota &Lacze
+* @param Vector3 begin_position
+* @param Vector3 scale
+* @param char choice
+*/
 void make_obstacle(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale, char choice){
     Scene_object tmp;
     switch(choice){
         case '1':{
             tmp = Piramid(Lacze,begin_position,scale);
-            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
             Objects.push_back(std::make_shared<Scene_object>(tmp));        
         break;}
 
         case '2':{
             tmp = Mount_with_ridge(Lacze,begin_position,scale);
             Objects.push_back(std::make_shared<Scene_object>(tmp));
-            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
 
         case '3':{
             tmp = Cuboid_obstacle(Lacze,begin_position,scale);
             Objects.push_back(std::make_shared<Scene_object>(tmp));
-            // Obstacles.push_back(std::make_shared<Scene_object>(tmp));
         break;}
     }
 
     Lacze.Rysuj();
 };
 
+/**
+* Metoda Inicjujaca przeszkody poczatkowe 
+* @param PzG::LaczeDoGNUPlota &Lacze
+*/
 void Initiation_begin_obstacles(PzG::LaczeDoGNUPlota &Lacze){
     Vector3 arg1,arg2,arg3,arg4;
     Vector3 scale;

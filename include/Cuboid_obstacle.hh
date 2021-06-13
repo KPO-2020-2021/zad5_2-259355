@@ -1,8 +1,19 @@
 #include "Scene_object.hh"
+
+/**
+ * \brief Klasa Cuboid
+ * 
+ * Klasa pozwalajaca dzialac na plaskowyzach
+ * Klasa dziedziczy po klasie Scene_Object 
+ * 
+ */
 class Cuboid_obstacle : public Scene_object{
 
     public:
 
+    /**
+     * Metoda inicjujaca poczatkowe wierzcholki piramidy odpowiednio deformujac prostopadloscian
+     */
     void Cuboid_Init(){
         double x,y,z;
         Prostopadl tmp;
@@ -31,6 +42,12 @@ class Cuboid_obstacle : public Scene_object{
         // FileWy.close();
     }} 
 
+    /**
+     * Metoda tworzaca odpowiednio zmieniony prostopadloscian 
+     * @param PzG::LaczeDoGNUPlota &Lacze
+     * @param Vector3 begin_position
+     * @param Vector3 scale
+     */
     Cuboid_obstacle(PzG::LaczeDoGNUPlota &Lacze,Vector3 begin_position, Vector3 scale){
         Cuboid_Init();
         static int count3 = 1;
